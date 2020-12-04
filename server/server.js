@@ -32,7 +32,9 @@ app.use(function (req, res, next) {
 
 // =========== Routes ===========
 import zendesk from './routes/zendesk';
+import vsme from './routes/vsme';
 app.use('/zendesk', zendesk);
+app.use('/vsme', vsme);
 
 // =========== Firestore ===========
 // import Firestore from './api/Firestore';
