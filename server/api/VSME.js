@@ -12,19 +12,74 @@ class VSME {
   async search(query, documents, engine) {
     try {
       let results = await axios({
-        method: 'POST',
+        method: "POST",
         url: `https://${DOMAIN}/api/documentSearch/searchDocuments`,
         headers: {
-          'x-api-key': this.apiKey
+          "x-api-key": this.apiKey,
         },
         data: {
           query,
           documents,
-          engine
-        }
-      })
+          engine,
+        },
+      });
       return results.data;
-    } catch(err) {
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
+  async getAllDocSets() {
+    try {
+      let results = await axios({
+        method: "GET",
+        url: `https://${DOMAIN}/api/document/documentSets`,
+        headers: {
+          "x-api-key": this.apiKey,
+        },
+      });
+      return results.data;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
+  async createDocSet(name) {
+    try {
+      let results = await axios({
+        method: "POST",
+        url: `https://${DOMAIN}/api/document/documentSets`,
+        headers: {
+          "x-api-key": this.apiKey,
+        },
+        data: {
+          name,
+        },
+      });
+      return results.data;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
+  async addDocsToDocSet(documentSetId, documents) {
+    try {
+      let results = await axios({
+        method: "POST",
+        url: `https://${DOMAIN}/api/document/documents`,
+        headers: {
+          "x-api-key": this.apiKey,
+        },
+        data: {
+          documentSetId,
+          documents
+        },
+      });
+      return results.data;
+    } catch (err) {
       console.log(err);
       return null;
     }
